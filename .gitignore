@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+env/
+.env
+
+# Spyder
+.spyproject/
+.spyderproject
+.spyderworkspace
+
+# Data and generated research outputs
+data/raw/*
+data/processed/*
+data/external/*
+reports/figures/*
+reports/tables/*
+!data/raw/**/
+!data/processed/**/
+!data/external/**/
+!reports/figures/**/
+!reports/tables/**/
+!data/raw/.gitkeep
+!data/raw/**/.gitkeep
+!data/processed/.gitkeep
+!data/processed/**/.gitkeep
+!data/external/.gitkeep
+!data/external/**/.gitkeep
+!reports/figures/.gitkeep
+!reports/figures/**/.gitkeep
+!reports/tables/.gitkeep
+!reports/tables/**/.gitkeep
+
+# OS/editor
+.DS_Store
+Thumbs.db
