@@ -1,0 +1,6 @@
+factor,largest_positive_asset,largest_positive_exposure,largest_negative_asset,largest_negative_exposure
+Macro Tightness Shock,TLT,0.0183,MS,-0.0541
+Downside Market,EME,0.013,XOM,-0.0028
+Credit Liquidity Shock,TLT,0.0061,XOM,-0.0244
+Real Yield Shock,XOM,0.0125,TLT,-0.0341
+Curve Shock,MO,0.009,ORLY,-0.0133

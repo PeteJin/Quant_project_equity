@@ -1,0 +1,6 @@
+,Macro Tightness Shock,Downside Market,Credit Liquidity Shock,Real Yield Shock,Curve Shock
+Macro Tightness Shock,1.0,-0.253,0.297,0.203,0.244
+Downside Market,-0.253,1.0,-0.469,-0.372,-0.476
+Credit Liquidity Shock,0.297,-0.469,1.0,0.226,0.785
+Real Yield Shock,0.203,-0.372,0.226,1.0,0.254
+Curve Shock,0.244,-0.476,0.785,0.254,1.0

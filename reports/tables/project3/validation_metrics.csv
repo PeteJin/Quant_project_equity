@@ -1,0 +1,6 @@
+,0
+mean_predicted_volatility,0.1087
+mean_realized_volatility,0.1088
+mean_absolute_error,0.0126
+rmse,0.0186
+correlation,0.8588
