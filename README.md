@@ -78,9 +78,8 @@ Optimizer Allocations.png
 Rolling Regime-Aware Portfolio Backtest.png
 Black-Litterman vs Benchmarks.png
 Monte-Carlo Terminal Return Distributions.png
-Portfolio Factor Risk Contribution.png
 Rolling Factor Risk Attribution.png
-Predicted vs Realized Volatility.png
+Implied vs realized vol.png
 ```
 
 Processed model tables and backtest results are written to:
