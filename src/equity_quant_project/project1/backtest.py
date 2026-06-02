@@ -16,7 +16,6 @@ from scipy.cluster.hierarchy import fcluster
 from scipy.spatial.distance import squareform
 
 
-
 assets = ["CASY", "ORLY", "TLT", "SHY", "LMT", "DE", "MO", "GLD", "MS", "XOM", "EME"]
 
 raw_folder = "data/raw/macro"
@@ -102,6 +101,7 @@ realized_returns = pd.DataFrame(index=rebalance_dates[1:], columns=strategy_name
 turnover = pd.Series(0.0, index=rebalance_dates[1:])
 weight_history = {}
 previous_bl_weight = pd.Series(1 / len(assets), index=assets)
+daily_plot_returns = {name: [] for name in strategy_names}
 
 for i in range(len(rebalance_dates) - 1):
     train_end = rebalance_dates[i]
@@ -411,10 +411,12 @@ for i in range(len(rebalance_dates) - 1):
             continue
 
         portfolio_daily = hold_returns @ weights[name]
+        daily_plot_returns[name].append(portfolio_daily)
         realized_returns.loc[hold_end, name] = (1 + portfolio_daily).prod() - 1
 
     spy_hold_returns = spy_prices.pct_change().dropna()
     spy_hold_returns = spy_hold_returns[(spy_hold_returns.index > train_end) & (spy_hold_returns.index <= hold_end)]
+    daily_plot_returns["S&P 500"].append(spy_hold_returns)
     spy_month_return = (1 + spy_hold_returns).prod() - 1
     realized_returns.loc[hold_end, "S&P 500"] = spy_month_return
 
@@ -426,6 +428,13 @@ for i in range(len(rebalance_dates) - 1):
 realized_returns = realized_returns.astype(float).dropna()
 portfolio_values = (1 + realized_returns).cumprod()
 cumulative_returns = portfolio_values - 1
+
+daily_realized_returns = pd.DataFrame({
+    name: pd.concat(daily_plot_returns[name]).sort_index()
+    for name in strategy_names
+})
+daily_portfolio_values = (1 + daily_realized_returns).cumprod()
+daily_cumulative_returns = daily_portfolio_values - 1
 
 summary_columns = [
     "annual_return",
@@ -474,7 +483,6 @@ for name in strategy_names:
 summary = summary.astype(float)
 summary["excess_return_vs_equal_weight"] = summary["annual_return"] - summary.loc["Equal Weight", "annual_return"]
 summary["excess_return_vs_sp500"] = summary["annual_return"] - summary.loc["S&P 500", "annual_return"]
-
 weight_history = pd.DataFrame(weight_history).T
 weight_history.index.name = "date"
 
@@ -482,6 +490,8 @@ os.makedirs(output_folder, exist_ok=True)
 realized_returns.to_csv(output_folder + "/rolling_backtest_returns.csv")
 portfolio_values.to_csv(output_folder + "/rolling_backtest_values.csv")
 cumulative_returns.to_csv(output_folder + "/rolling_backtest_cumulative_returns.csv")
+daily_portfolio_values.to_csv(output_folder + "/rolling_backtest_daily_values.csv")
+daily_cumulative_returns.to_csv(output_folder + "/rolling_backtest_daily_cumulative_returns.csv")
 summary.to_csv(output_folder + "/rolling_backtest_summary.csv")
 weight_history.to_csv(output_folder + "/rolling_bl_weight_history.csv")
 
@@ -532,11 +542,17 @@ print("Rolling backtest tail risk:")
 print(tail_table.to_string())
 print()
 print("Average BL turnover:", round(turnover.mean(), 4))
+print()
 print("Last BL allocation:")
 print(weight_history.iloc[-1].sort_values(ascending=False).round(4).to_string())
 
-fig, ax = plt.subplots(figsize=(10, 7))
-cumulative_returns.plot(ax=ax, linewidth=1.8)
+fig, ax = plt.subplots(figsize=(12, 7))
+
+for name in daily_cumulative_returns.columns:
+    if name == "BL":
+        ax.plot(daily_cumulative_returns.index, daily_cumulative_returns[name], label=name, linewidth=2.3)
+    else:
+        ax.plot(daily_cumulative_returns.index, daily_cumulative_returns[name], label=name, linewidth=1.9)
 
 ax.set_title("Rolling Regime-Aware Portfolio Backtest", fontsize=20, fontweight="bold", pad=12)
 ax.set_ylabel("Cumulative percentage change", fontsize=13)
@@ -553,8 +569,11 @@ for side in ["top", "right", "bottom", "left"]:
 fig.tight_layout()
 plt.show(block=False)
 
-fig_compare, ax_compare = plt.subplots(figsize=(10, 7))
-cumulative_returns[["BL", "S&P 500", "Equal Weight"]].plot(ax=ax_compare, linewidth=2.0)
+fig_compare, ax_compare = plt.subplots(figsize=(12, 7))
+
+ax_compare.plot(daily_cumulative_returns.index, daily_cumulative_returns["BL"], label="BL", linewidth=2.4)
+ax_compare.plot(daily_cumulative_returns.index, daily_cumulative_returns["S&P 500"], label="S&P 500", linewidth=2.0)
+ax_compare.plot(daily_cumulative_returns.index, daily_cumulative_returns["Equal Weight"], label="Equal Weight", linewidth=2.0)
 
 ax_compare.set_title("BL vs Benchmarks", fontsize=20, fontweight="bold", pad=12)
 ax_compare.set_ylabel("Cumulative percentage change", fontsize=13)

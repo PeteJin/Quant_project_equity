@@ -1,5 +1,8 @@
 ,0
-macro_tightness_shock,2.0
-credit_liquidity_shock,1.5
+vix_tightness_shock,2.0
+hy_spread_tightness_shock,2.0
+t10y2y_tightness_shock,2.0
 real_yield_shock,1.5
-portfolio_stress_return,-0.0633
+credit_market_beta,-1.0
+tips_duration_beta,-1.0
+portfolio_stress_return,-0.0541

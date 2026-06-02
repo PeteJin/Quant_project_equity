@@ -1,6 +1,9 @@
 ,0
-Macro Tightness Shock,0.415
-Downside Market,0.0392
-Credit Liquidity Shock,0.0986
-Real Yield Shock,0.1307
-Curve Shock,0.005
+VIX Tightness Shock,0.1345
+HY Spread Tightness Shock,0.035
+T10Y2Y Tightness Shock,0.1664
+Equity Market Beta,0.1638
+TIPS Duration Beta,0.0564
+Credit Market Beta,0.05
+Downside Market Shock,0.0222
+Real Yield Shock,-0.0005

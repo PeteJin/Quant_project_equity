@@ -1,9 +1,9 @@
 ,0
-sample_portfolio_variance,0.02
-raw_factor_model_variance,0.0094
-factor_variance,0.0138
-specific_variance,0.0062
-total_variance,0.02
-predicted_volatility,0.1416
-factor_risk_share,0.6885
-specific_risk_share,0.3115
+linear_factor_variance,0.0122
+factor_variance,0.0122
+specific_variance,0.0072
+total_variance,0.0194
+predicted_volatility,0.1394
+factor_risk_share,0.6278
+specific_risk_share,0.3722
+specific_shrinkage,0.0741
