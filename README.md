@@ -139,9 +139,6 @@ Project 3 extends the portfolio work into a Barra-style risk attribution analysi
 
 The model uses the HMM regime inputs as the first layer of risk factors, then adds institutional market factors and custom macro shocks:
 
-- **VIX Tightness Shock**: volatility stress input from the HMM regime framework
-- **HY Spread Tightness Shock**: credit spread stress input from the HMM regime framework
-- **T10Y2Y Tightness Shock**: Treasury curve tightness input from the HMM regime framework
 - **Equity Market Beta**: uses SPY as the broad equity market factor
 - **TIPS Duration Beta**: uses TIP as the inflation-linked duration factor
 - **Credit Market Beta**: uses HYG as the credit beta factor
