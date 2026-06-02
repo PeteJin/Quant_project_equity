@@ -172,9 +172,9 @@ Macro stress scenario impact
 
 ![Rolling Factor Risk Attribution](reports/figures/project3/Rolling%20Factor%20Risk%20Attribution.png)
 
-### Predicted vs Forward Realized Volatility
+### Implied vs Forward Realized Volatility
 
-![Predicted vs Forward Realized Volatility](reports/figures/project3/Predicted%20vs%20Realized%20Volatility.png)
+![Implied vs Forward Realized Volatility](reports/figures/project3/Predicted%20vs%20Realized%20Volatility.png)
 
 ### Sample vs Factor Model Covariance
 
@@ -183,3 +183,4 @@ Macro stress scenario impact
 ### Stress Scenario by Asset
 
 ![Stress Scenario by Asset](reports/figures/project3/Stress%20Scenario%20by%20Asset.png)
+
